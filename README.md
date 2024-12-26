@@ -13,3 +13,27 @@ The system leverages the power of a retrieval-augmented generation approach, whi
 - **Table Retrieval**: Extract information from structured tables and process it into useful insights.
 - **Image Retrieval**: Employ image-based models to retrieve and analyze image data.
 - **Integrated Generation**: Combine the retrieved information with generation models to provide detailed and coherent responses.
+
+## **Important Note**
+
+Before running the system, make sure to adapt the file paths (such as data directories) and API keys (like Groq API keys) according to your local environment. These configurations are necessary for correct data handling and API access.
+
+Also, please note that this project was implemented on **Kaggle** due to its available large GPU and RAM capacities, which were crucial for handling the resource-intensive operations required by the RAG model.
+
+## Dependencies
+
+To install the necessary dependencies for the project, you can either run the following commands directly or use the `requirements.txt` file. 
+
+### Direct Installation:
+
+Run the following commands:
+
+```bash
+!pip install -Uq "unstructured[all-docs]" pillow lxml pillow --quiet --progress-bar off
+!pip install -Uq chromadb tiktoken --quiet --progress-bar off
+!pip install -Uq langchain langchain-community langchain-groq --quiet --progress-bar off
+!pip install -Uq python_dotenv --quiet --progress-bar off
+!sudo apt-get install poppler-utils tesseract-ocr libmagic-dev
+!pip install langchain_huggingface --quiet
+!pip install langchain-chroma --quiet
+
