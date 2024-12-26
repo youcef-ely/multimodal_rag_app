@@ -36,4 +36,6 @@ Run the following commands:
 !sudo apt-get install poppler-utils tesseract-ocr libmagic-dev
 !pip install langchain_huggingface --quiet
 !pip install langchain-chroma --quiet
+```
 
+Please refer to [Ollama's repository](https://github.com/ollama/ollama) to install and download the models.
