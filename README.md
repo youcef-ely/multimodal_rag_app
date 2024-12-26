@@ -38,4 +38,10 @@ Run the following commands:
 !pip install langchain-chroma --quiet
 ```
 
+or 
+
+```bash
+!python install_packages.py
+```
+
 Please refer to [Ollama's repository](https://github.com/ollama/ollama) to install and download the models.
