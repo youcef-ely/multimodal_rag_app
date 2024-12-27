@@ -1,0 +1,14 @@
+paths:
+  data_dir: "/data"
+  
+
+models:
+  text_summary_model: 'llama-3.1-8b-instant'
+  image_summary_model: 'llava:13b'
+  embedding_model: 'llama3'
+  chat_model: 'llama2:13b-chat'
+
+parameters:
+  collection_name: 'multi_modal_rag'
+
+
