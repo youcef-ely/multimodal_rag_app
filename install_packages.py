@@ -1,6 +1,6 @@
 import os
 import subprocess
-
+from tqdm import tqdm
 os.environ['PYTHONWARNINGS'] = 'ignore'
 
 
@@ -16,5 +16,5 @@ commands = [
     'pip install -U langchain-ollama --quiet'
 ]
 
-for command in commands:
+for command in tqdm(commands, desc='Installing packages'):
     subprocess.run(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
