@@ -9,11 +9,12 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain.retrievers.multi_vector import MultiVectorRetriever
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Load configuration
 
-DATA_DIR = os.path.join('..', 'data')
-CHROMA_DB_DIR = os.path.join(DATA_DIR, 'chroma_db')
-DOCSTORE_PATH = os.path.join(DATA_DIR, 'docstore.pkl')
+CHROMA_DB_DIR = os.path.join(current_dir, '..', 'data/chroma_db')
+DOCSTORE_PATH = os.path.join(current_dir, '..', 'data/docstore.pkl')
 
 config = load_config()
 CHAT_MODEL = config['models']['chat_model']
