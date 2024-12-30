@@ -1,4 +1,8 @@
 import os
+import subprocess
+
+os.environ['PYTHONWARNINGS'] = 'ignore'
+
 
 commands = [
     'pip install -Uq "unstructured[all-docs]" pillow lxml pillow --quiet --progress-bar off',
@@ -13,4 +17,4 @@ commands = [
 ]
 
 for command in commands:
-    os.system(command)
+    subprocess.run(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

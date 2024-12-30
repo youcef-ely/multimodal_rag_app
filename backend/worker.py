@@ -31,6 +31,7 @@ vectorstore = Chroma(
 
 # Load document store
 store_dict = load_from_pickle(DOCSTORE_PATH)
+
 store = InMemoryByteStore()
 store.mset(list(store_dict.items()))
 

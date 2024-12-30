@@ -1,5 +1,3 @@
-
-import sys
 from fastapi import FastAPI
 from pydantic import BaseModel
 from backend.worker import request_response
