@@ -10,12 +10,12 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.retrievers.multi_vector import MultiVectorRetriever
 
 # Load configuration
-CONFIG_PATH = os.path.join('..', 'config.yaml')
+
 DATA_DIR = os.path.join('..', 'data')
 CHROMA_DB_DIR = os.path.join(DATA_DIR, 'chroma_db')
 DOCSTORE_PATH = os.path.join(DATA_DIR, 'docstore.pkl')
 
-config = load_config(CONFIG_PATH)
+config = load_config('../../config.yaml')
 CHAT_MODEL = config['models']['chat_model']
 EMBEDDING_MODEL = config['models']['embedding_model']
 COLLECTION_NAME = config['parameters']['collection_name']
