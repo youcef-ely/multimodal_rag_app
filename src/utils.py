@@ -1,3 +1,4 @@
+import os
 import uuid
 import yaml
 import pickle
@@ -8,7 +9,7 @@ from langchain.schema.document import Document
 # Global constant for ID key
 ID_KEY = "doc_id"
 
-def load_config(config_file: str) -> dict:
+def load_config() -> dict:
     """
     Load configuration from a YAML file.
 
@@ -18,7 +19,12 @@ def load_config(config_file: str) -> dict:
     Returns:
         dict: Parsed configuration data as a dictionary.
     """
-    with open(config_file, 'r') as file:
+
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Navigate to the parent directory and construct the path to config.yaml
+    config_path = os.path.join(current_dir, '..', 'config.yaml')
+
+    with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
     return config
 
