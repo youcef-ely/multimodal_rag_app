@@ -1,45 +1,57 @@
+import os
+from src.utils import load_config, load_from_pickle
 
-import pickle
-from src.utils import load_config
-from langchain_chroma  import Chroma
-from langchain_ollama import ChatOllama
-from langchain_ollama import OllamaEmbeddings
-from langchain_core.messages import HumanMessage
+from langchain_chroma import Chroma
+from langchain_ollama import ChatOllama, OllamaEmbeddings
+from langchain.storage import InMemoryByteStore
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
-from langchain.retrievers.multi_vector import MultiVectorRetriever
 from langchain_core.output_parsers import StrOutputParser
+from langchain.retrievers.multi_vector import MultiVectorRetriever
 
-config = load_config('config.yaml')
-COLLECTION_NAME = config['parameters']['collection_name']
-EMBEDDING_MODEL = config['models']['embedding_model']
+# Load configuration
+CONFIG_PATH = os.path.join('..', 'config.yaml')
+DATA_DIR = os.path.join('..', 'data')
+CHROMA_DB_DIR = os.path.join(DATA_DIR, 'chroma_db')
+DOCSTORE_PATH = os.path.join(DATA_DIR, 'docstore.pkl')
+
+config = load_config(CONFIG_PATH)
 CHAT_MODEL = config['models']['chat_model']
+EMBEDDING_MODEL = config['models']['embedding_model']
+COLLECTION_NAME = config['parameters']['collection_name']
 
+# Initialize embedding model
+embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL)
 
+# Initialize vector store
 vectorstore = Chroma(
-    collection_name=COLLECTION_NAME,
-    persist_directory='/kaggle/working/chroma_db',
+    embedding_function=embeddings,
+    persist_directory=CHROMA_DB_DIR,
 )
 
-with open('/kaggle/working/docstore.pkl', 'rb') as f:
-    retriever_config = pickle.load(f)
+# Load document store
+store_dict = load_from_pickle(DOCSTORE_PATH)
+store = InMemoryByteStore()
+store.mset(list(store_dict.items()))
 
+# Create retriever
 retriever = MultiVectorRetriever(
+    id_key='doc_id',
     vectorstore=vectorstore,
-    docstore=retriever_config['docstore'],
-    id_key=retriever_config['id_key'],
+    byte_store=store,
 )
 
-
-
+# Initialize language model
 llm = ChatOllama(model=CHAT_MODEL, temperature=0)
 
+# Define the prompt template
 template = """Answer the question based only on the following context:
 {context}
 Question: {question}
 """
-
 prompt = ChatPromptTemplate.from_template(template)
+
+# Define the processing chain
 chain = (
     {"context": retriever, "question": RunnablePassthrough()}
     | prompt
@@ -48,4 +60,12 @@ chain = (
 )
 
 def request_response(query: str):
+    """Process a query through the chain and return the response.
+
+    Args:
+        query (str): The input query.
+
+    Returns:
+        str: The generated response.
+    """
     return chain.invoke(query)
