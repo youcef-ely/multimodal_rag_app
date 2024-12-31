@@ -1,11 +1,7 @@
-import sys
 import json
 import requests
 import streamlit as st
-
-sys.path.append('../backend')
-
-from backend.worker import request_response
+from ...backend.worker import request_response
 
 
 
