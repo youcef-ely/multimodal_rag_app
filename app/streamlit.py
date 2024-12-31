@@ -1,6 +1,6 @@
 import json
 import requests
-import app.streamlit as st
+import streamlit as st
 from worker import request_response
 
 
