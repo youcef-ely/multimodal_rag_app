@@ -1,7 +1,11 @@
+import sys
 import json
 import requests
 import streamlit as st
-from multimodel_rag_app.backend.worker import request_response
+
+sys.path.append('../backend')
+
+from backend.worker import request_response
 
 
 
