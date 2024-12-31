@@ -1,7 +1,7 @@
 import json
 import requests
 import streamlit as st
-from backend.worker import request_response
+from multimodel_rag_app.backend.worker import request_response
 
 
 
