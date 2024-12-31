@@ -5,7 +5,7 @@ import streamlit as st
 
 st.title('MultiModal RAG')
 
-query = st.text('Enter your request or your question below')
+query = st.text_input('Enter your request or your question below')
 inputs = {'query': query}
 
 if st.button('Answer'):
