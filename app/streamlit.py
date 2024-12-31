@@ -1,7 +1,7 @@
 import json
 import requests
 import app.streamlit as st
-from app.worker import request_response
+from worker import request_response
 
 
 
