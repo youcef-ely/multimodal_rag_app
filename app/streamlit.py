@@ -1,7 +1,7 @@
 import json
 import requests
-import streamlit as st
-from backend.worker import request_response
+import app.streamlit as st
+from app.worker import request_response
 
 
 
