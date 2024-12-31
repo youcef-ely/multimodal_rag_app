@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from worker import request_response
+from multimodal_rag_app.app.worker import request_response
 
 class UserInput(BaseModel):
     query: str

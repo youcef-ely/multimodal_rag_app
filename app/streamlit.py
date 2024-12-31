@@ -1,10 +1,6 @@
-import json
 import requests
 import streamlit as st
-from worker import request_response
-
-
-
+from multimodal_rag_app.app.worker import request_response
 
 
 # Title and description
