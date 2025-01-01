@@ -1,11 +1,17 @@
 import os, sys
+
+from groq import Client
+from langchain_groq import ChatGroq
+
 from langchain_chroma import Chroma
-from langchain_ollama import ChatOllama, OllamaEmbeddings
+
+from langchain_ollama import OllamaEmbeddings
 from langchain.storage import InMemoryByteStore
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain.retrievers.multi_vector import MultiVectorRetriever
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(current_dir, '..', 'src'))
@@ -47,8 +53,9 @@ retriever = MultiVectorRetriever(
     byte_store=store,
 )
 
-# Initialize language model
-llm = ChatOllama(model=CHAT_MODEL, temperature=0)
+
+client = Client(api_key=os.getenv("GROQ_API_KEY"))
+model = ChatGroq(temperature=0.5, model=CHAT_MODEL)
 
 # Define the prompt template
 template = """Answer the question based only on the following context:
@@ -61,7 +68,7 @@ prompt = ChatPromptTemplate.from_template(template)
 chain = (
     {"context": retriever, "question": RunnablePassthrough()}
     | prompt
-    | llm
+    | model
     | StrOutputParser()
 )
 

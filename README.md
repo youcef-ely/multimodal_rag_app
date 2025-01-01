@@ -41,7 +41,19 @@ Run the following commands:
 or 
 
 ```bash
-!python install_packages.py
+!python src/install_packages.py
 ```
 
 Please refer to [Ollama's repository](https://github.com/ollama/ollama) to install and download the models.
+
+## First Prototype
+
+![First Prototype](C:/Users/User/Desktop/RAG_INTERFACE.jpg)
+
+This image represents the initial prototype of the application.
+
+To run the application, execute the following command:
+
+```bash
+streamlit run frontend/streamlit.py
+```
