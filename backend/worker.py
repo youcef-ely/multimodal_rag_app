@@ -1,5 +1,4 @@
-import os
-
+import os, sys
 from langchain_chroma import Chroma
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain.storage import InMemoryByteStore
@@ -7,7 +6,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain.retrievers.multi_vector import MultiVectorRetriever
-from multimodal_rag_app.src.utils import load_config, load_from_pickle
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(current_dir, '..', 'src'))
+
+from utils import load_config, load_from_pickle
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
