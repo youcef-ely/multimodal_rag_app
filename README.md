@@ -48,7 +48,7 @@ Please refer to [Ollama's repository](https://github.com/ollama/ollama) to insta
 
 ## First Prototype
 
-![First Prototype](C:/Users/User/Desktop/RAG_INTERFACE.jpg)
+![First Prototype](RAG_INTERFACE.jpg)
 
 This image represents the initial prototype of the application.
 
